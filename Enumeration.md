@@ -50,12 +50,12 @@ Now, assume that $s \in S$ ; if $s \geq x$, since $S$ is an initial segment,
 $x \in S$, which is absurd; thus, $s < x$. Consequently, $S = S_x$.
 
 Conversely, assume that every proper initial segment $S$ of $X$ is equal to
-$S_x$ for some $x \in X$. Let $A$ be a non-empty subset of $X$ and $S$ the
-set of all $s \in X$ which are less than every element $a$ of $A$. The
-set $S$ is a proper initial segment of $X$: indeed if $x \leq s \in S$, 
-then for every $a \in A$, $x \leq s < a$, hence $x \leq a$ and thus
-$x \in S$. Let $x \in X$ such that $S = S_x$. 
-
-**TODO.** $x \in A$ and $x$ least element of $A$. 
+$S_x$ for some $x \in X$. Let $A$ be a non-empty subset of $X$ and let $S$ 
+be the set of all $s \in X$ which are less than every element $a$ of $A$. 
+The set $S$ is a proper initial segment of $X$: indeed if $x \leq s \in S$, 
+then for every $a \in A$, $x \leq s < a$, hence $x < a$ and thus
+$x \in S$. Let $x \in X$ such that $S = S_x$. Since by construction 
+$S\cap A =\varnothing$, $x \in A$ ; if $y < x$, then $y \in S_x= S$, 
+thus $y \not \in A$: $x$ is the least element of $A$.
 $\blacksquare$
 
