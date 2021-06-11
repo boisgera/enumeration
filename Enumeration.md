@@ -26,8 +26,20 @@ $$
 (or for short $x \leq s \in S \rightarrow x \in S$). 
 The initial segment $S$ is *proper* if $S \subset X$.
 
+#### Initial segments of $\mathbb{R}$
+For example, for any $x\in\mathbb{R}$, $\left]-\infty, x\right[$ 
+and $\left]-\infty, x\right]$ as well as $\varnothing$ and $\mathbb{R}$ 
+are initial segments of $\mathbb{R}$. 
+They actually are the only ones: 
+for any proper initial segment $S$, let $x=\sup S \in \left[-\infty, +\infty\right]$;
+if $y < x$, $y$ is not an upper bound of $S$ thus there is a $s \in S$
+such that $y < s$, which yields $y \in S$; consequently, 
+$S=\left]-\infty, x\right]$ if $x$ belongs to $S$ and 
+$S=\left]-\infty, x\right[$ otherwise.
+
+
 #### Well-posed set
-A linearly ordered set $(X, \leq)$ is *well-ordered* if for every proper initial
+A linearly ordered set $X$ is *well-ordered* if for every proper initial
 segment $S$ of $W$, there is a $x \in X$ such that
 $$
 S = S_x := \{s \in X \; | \; s < x\}. 
