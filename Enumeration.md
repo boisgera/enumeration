@@ -4,17 +4,36 @@
 ---
 header-includes:
   - \DeclareMathOperator*{\seg}{seg}
+  - \DeclareMathOperator*{\next}{next}
+  - \DeclareMathOperator*{\graph}{graph}
 ---
 
+### Introduction
 
-#### Notations
+**TODO:** transfinite (deep) enumeration, punch through the infinite and continue,
+"deep" sequences, order type of a well-ordered set and length of a sequence,
+(transfinite, deep) induction, or "proof by induction", "definition by induction"
+(or "transfinite recursion"), etc.
+
+### Notations
+
+  - $\varnothing$ is the empty set: $\forall x, \; x \not \in \varnothing$,
 
   - $A \subseteq B$: $A$ is included in $B$ ($\forall x \in A, x \in B$),
 
   - $A \subset B$: $A$ is strictly included in $B$ 
     ($A$ is included in $B$ but differs from it).
 
+For linearly ordered sets $X$:
 
+  - $0_X = \min X$ (if it exists), $1_X = \min X \setminus \{0\}$ (if it exists),
+    etc. We drop the $X$ subscript when the context is clear.
+
+  - $\left[x, y\right[ = \{z \in X \; | \; x \leq z < y\}$,
+
+  - 
+
+### Well-ordered Sets
 
 #### Initial segment
 A subset $S$ of an ordered set $X$ is an *initial segment* of
@@ -37,13 +56,26 @@ such that $y < s$, which yields $y \in S$; consequently,
 $S=\left]-\infty, x\right]$ if $x$ belongs to $S$ and 
 $S=\left]-\infty, x\right[$ otherwise.
 
-
 #### Well-posed set
 A linearly ordered set $X$ is *well-ordered* if for every proper initial
 segment $S$ of $W$, there is a $x \in X$ such that
 $$
 S = S_x := \{s \in X \; | \; s < x\}. 
 $$
+
+This is not totally obvious at first sight, but this is equivalent to
+
+#### Well-posed set
+A linearly ordered set $X$ is *well-ordered* if for any proper initial
+segment, there is a segment containing exactly one more point (or 
+equivalently a "next" point).
+
+**TODO.** proof.
+
+**TODO.** Also think more about it and the formulation since
+I feel that this stuff may be more intuitive than the formulation above:
+the segments are the "progress bar" of the enumeration and as long as
+we're not done, we can always extend the progress bar by "one tick".
 
 #### Well-posed set -- Alternate characterization
 An ordered set $X$ is well-posed if and only if any non-empty subset
@@ -70,4 +102,295 @@ $x \in S$. Let $x \in X$ such that $S = S_x$. Since by construction
 $S\cap A =\varnothing$, $x \in A$ ; if $y < x$, then $y \in S_x= S$, 
 thus $y \not \in A$: $x$ is the least element of $A$.
 $\blacksquare$
+
+### Woset definition, new thoughts
+
+AFAICT, we could define a woset as a set where every proper initial segment
+$S$ has a "successor" (generalizes the notion of successor for a single
+element, that's nice; we just have to promote the element to singletion; 
+notation operator "next" ?) defined as an element which is 
+larger (strict) than every element of the initial segment and such that there
+is no smaller element with this property.
+
+If we do that, we can do two things from here: we can **generalize** and 
+we can **dualize**.
+
+If we dualize, we end up with the property that every non-empty final segment 
+of the set has a min; but that's it. There is no other incentive to dualize
+since it makes things harder for the proof of transfinite recursion for
+example. If we generalize from here, we get the classic definition
+for woset.
+
+If we generalize first, we end up with: every set that does not contain the
+maximum of the woset (if it exists) has a successor.
+
+**TODO.** Do we need the generalisation to prove the transfinite recursion
+principle (we don't need the dualization AFAICT). Can we prove that the
+set of elements where the property holds is an initial segment beforehand?
+Or extract from the set where it works the largest initial segment?
+Yeah, that would totally work since the union of such sets is an initial
+segment. So we don't even need the generalization (even if it's nice to
+know that it exists and it's quite pretty since it is symmetric wrt the
+dualized version).
+
+So my preffered exposition would be so far: woset if every proper initial
+segment has a succesor and then show that the union is also an initial
+segment. And then explain transfinite recursion principle in connexion
+with this definition (maybe FIRST, to SHOW that we need the woset character.
+YEAH, absolutely). The definition fucking DISAPPEARS: it is obvious that we
+need to work in such structure for the TRP to have a chance to work.
+And probably show later for practical purposes that this property is equivalent 
+to the fact that every proper initial segment can be written $["0", x[$ ?
+
+**NOTA.** Set with a succesor to each elements are **inductive**. This is
+not strong enough *in general* to have some stronger recursion principle
+beyond $\mathbb{N}$. We could show that on the "double" $\mathbb{N}$
+(that "simple" induction does not break through the first wall).
+
+# Transfinite Induction
+
+#### Initial Segments and Successors
+
+A set $S$ is an *initial segment* of linearly ordered set $X$ if and only if
+$$
+\forall \, x, y \in X, \, (y \in S) \wedge (x \leq y) \to x \in S.
+$$
+It is *proper* if $S \neq X$ (i.e. $S \subset X$). We define the *successor*
+of an initial segment $S$ (whenever it exists) as
+$$
+\next(S) = \min \, \{w \in W \; | \; \forall \, s \in S, \, s < w\}.
+$$
+
+(Note that this specific definition of the successor is appropriate for **any** 
+subset $S$ of $X$ and not merely initial segments; but we don't care. For
+initial segments -- but only initial segments -- we could also use the
+definition $\next(S) := \min X \setminus S$.)
+
+**TODO:**
+
+  - Lemma union of init segments is a init segment,
+
+  - Lemma equal or one included in the other,
+
+  - Lemma if next exist, union of seg and next is a segment
+    (the smaller larger than the initial one)
+
+(Note that if the successor exists, $S \cup \{\next(S)\}$ is also an initial
+segment of $W$, so we could also consider/define the successor of an initial
+segment as an initial segment.)
+
+
+#### Well-Ordered Set
+A linearly ordered set is *well-ordered* if any proper initial segment has
+a successor.
+
+#### Proper Initial Segments and Intervals
+For every element $x$ of a linearly ordered set $X$,
+the interval $\left[0, x\right[$ is a proper initial segment of $X$.
+The set $X$ is well-ordered if and only if the converse is true:
+$$
+\mbox{$S$ is a proper initial segment of $X$} 
+\, \to \,
+\exists \, x \in X, \, S = \left[0, x\right[.
+$$
+
+#### Proof 
+If $x \in X$, $y \in \left[0, x\right[$ and $z \leq y$, then
+$z \leq y < x$, thus $z < x$ and $z \in \left[0, x\right[$. 
+Hence, $\left[0, x\right[$ is an initial segment of $X$. 
+Since $x \not \in \left[0, x\right[$, it is also proper.
+
+Conversely, if every proper initial segment $S$ has a successor $x := \next(S)$,
+since $x = \min \{y \in X \; | \; \forall \, s \in S, \, s < y\}$,
+we have $S \subseteq \left[0, x\right[$. If the inclusion was strict, there
+would be a $y < x$ such that $y \not \in S$; since $S$ is an initial segment,
+no element greater than $y$ could belong to $S$ and thus we would have
+$s < y$ for every $s \in S$, a contradiction with the fact that $x$ is the
+minimum among those elements. $\blacksquare$
+
+#### Transfinite Induction
+Let $W$ be a linearly ordered set and let $A \subseteq W$. 
+If for every proper initial segment $S$ of $W$ there is a 
+successor $\next(S)$ and if
+$S \subseteq A$ implies $\next(S) \in A$ then $A = W$.
+
+#### Proof 
+Consider the collection of initial segments included in $A$; its union $S$ is
+an initial segment included in $A$, thus it is the largest
+element of the collection. 
+If $S \subset W$, $\next(S) \in A$, hence $S \cup \{\next(S)\}$ is initial 
+segment of $W$ larger than $S$ and included in $A$,
+which yields a contradiction. Thus $S = W$, then $A= W$ and the theorem
+holds. $\blacksquare$
+
+**TODO:** mention "proof by induction" and properties as a corollary.
+
+## Definition by Induction: Transfinite Recursion
+
+(aka transfinite *recursion*). Merely an application of transfinite induction
+that establishes existence and uniquemeness of a mathematical object, i.e. two
+proofs by induction[^cTRTI]. Nevertheless, if this is our final goal, we can shortcut 
+a lot of things directly, without even a formal definition of well-ordered set!
+
+[^cTRTI]: Conversely if we have the transfinite recursion theorem, it's pretty
+easy to prove the transfinite induction: the induction hypothesis proves that
+the property we are interested in has a single valid value everywhere: true.
+That's another argument that justifies the rush for the TR result: the "other
+good things" can be derived from it easily.
+
+#### Transfinite Recursion
+Let $W$ be a linearly ordered set, let $X$ be a set and let $F$ be a function 
+that associates to any function of $S \to X$ 
+-- where $S$ is a proper initial segment of $W$ -- an element of $X$. 
+Then, if for every proper initial segment $S$ of $W$ there is a successor
+$\next(S)$, 
+there is a unique function $f: W \to X$ such that for every proper 
+initial segment of $W$,
+$$
+f(\next(S)) = F(f|_S).
+$$
+
+#### Proof 
+
+When $W$ has a successor for any proper initial segment and $\infty$ is an
+element greater than any $w \in W$, the set $W \cup \{\infty\}$ has the
+same property.
+We will prove by transfinite induction that for every $w \in W \cup \{\infty\}$,
+the transfinite recursion theorem holds on $\left[0, w\right[$; 
+since $W = \left[0, \infty \right[$, that will demonstrate the theorem.
+
+Let $S$ be a proper initial segment of $W \cup \{\infty\}$ 
+such that the transfinite recursion theorem holds on $\left[0, v\right[$
+when $v \in S$.
+Since $S = \left[0, w\right[$ with $w := \next(S)$,
+the transfinite recursion theorem holds on $\left[0, v\right[$ whenever $v < w$.
+Let $f_{v}$ be the corresponding function from $\left[0, v\right[$ to $X$.
+
+Assume that there is a function $f_w: \left[0, w\right[ \to X$ defined
+by $f_w(\next(T)) = F(f_w|_T)$ for any proper initial segment $T$ of 
+$\left[0, w\right[$.
+
+If $w =\next(\left[0, v\right[)$ for some $v < w$, then the proper initial
+segments of $\left[0, w\right[$ are either proper initial segments of 
+$\left[0, v\right[$ or $\left[0, v\right[$ itself.
+Thus we necessarily have $f_w|_{\left[0,v\right[} = f_v$ and
+$f_w(v) = F(f_w|_{\left[0,v\right[}) = F(f_v)$.
+Thus, since $\left[0, w\right[ = [0, v]$, $f_w$ is uniquely determined.
+We have actually checked the recursion equations for all proper initial 
+segments of $\left[0, w\right[$, so it is effectively the unique 
+solution to the recursion theorem on $\left[0, w\right[$.
+
+Otherwise we necessarily have
+$\left[0, w\right[ = \bigcup_{v < w} \left[0, v\right[$. 
+In this case, every proper initial segment of $\left[0, w\right[$ is a
+proper initial segment of $\left[0, v\right[$ for some $v < w$.
+The function $f_w$ is uniquely determined by $f_w|_{\left[0, v\right[} = f_v$
+(we can easily check that this set of constraints is consistent: 
+when $v'<v''$, $f_{v''}|_{\left[0, v'\right[} = f_{v'}$);
+Conversely, this function is a solution to all required recursion equations 
+ans is thus the unique solution to the transfinite recursion theorem
+on $\left[0, w\right[$.
+
+The induction hypothesis holds in every case, thus our proof is complete. 
+$\blacksquare$
+
+
+### Transfinite Recursion (classic)
+Let $W$ be a well-ordered set, let $X$ be a set and let $F$ be a function 
+that associates to any function $\left[0, w\right[ \to X$ 
+-- where $w \in W$ -- an element of $X$. 
+Then, here is a unique function $f: W \to X$ such that for every 
+$w \in W$,
+$$
+f(w) = F(f|_{\left[0, w\right[}).
+$$
+
+This is shorter, but it's (slightly) less obvious why we need the well-ordered
+set concept; it would be far less obvious if we had adopted the classic definition
+of well-ordered set.
+
+### "Constructive" definition of ordinals
+
+**TODO.** By TR: for any well-ordered set $W$, define the corresponding length
+$\alpha$ recursively; show that $W$ and $\alpha$ are isomorphic and that
+isomorphic well-posed sets have the same length. Define ordinals as the set of
+possible length, and THEN, prove their properties.
+
+### Sets vs Classes
+
+The "general" transfinite recursion statement can use a class function $F$
+defined on sequences of length $\alpha$ for any ordinal $\alpha$ (or any
+well-ordered class I guess ...) and does not require that the range of $F$ 
+is included in any set. And it produces
+a class function $f$ defined for every ordinal. The second restriction
+(the range of $F$ not being prescribed) could easily be lifted in the 
+set version of the result (direct application of replacement). For the
+first one, what we could do is apply repeatedly the result for every
+$F|_{\alpha}$ where $\alpha$ is an ordinal, check that the corresponding
+$f|_{\alpha}$ are consistent with each other ($f|_{\alpha} = (f|_{\beta})|_{\alpha}$
+if $\alpha \leq \beta$) and thus we have the existence and uniqueness of the class
+function $f$. So, the class version of the TR result can easily be obtained from
+the set version if required.
+
+What is great in the class version of the TR theorem, when it is applied to
+the construction of a (bounded) sequence of increasing sets (or decreasing sets)
+is that the "stationary principle" (application of the axiom of replacement
+and the fact that the union of a set of ordinals is an ordinal).
+
+**TODO:** state / prove stationary principle.
+
+How would we find a "large enough" well-posed set that works for the
+construction of the set (and not the class) of a generated $\sigma$-algebra ?
+The study of countable well-posed sets may be tricky[^iR]; can we leverage a
+well-ordering of $\mathbb{R}$ instead (provided by the axiom of choice AND the
+principle of transfinite induction, applied to ordinals ! Nota: there is a nice
+idea here that no set is so large that it can't be (transfinitely) enumerated.
+Let me restate this: **every set can be enumerated** (don't think of it as
+a well-order, but as the existence of a sequence of length $\alpha$ -- an
+ordinal -- into $X$ such that every member is a value of the sequence exactly
+once)) ? 
+And prove that the sequence is stationary
+at the first uncountable initial segment it encounters (that probably amounts
+to show that the union of a countable collection of countable initial segments
+of $\mathbb{R}$ is a countable initial segment of $\mathbb{R}$, which is
+trivial ! Actually what we could do here is consider the smallest initial segment
+in $\mathbb{R}$ -- well-ordered -- which is uncoutable. Call it $\omega_1$ and
+that's it, show that the sequence is stationary from this point on. Probably
+ok, yes) ?
+
+[^iR]: despite the embedding of countable ordinals as well-ordered subsets of
+$\mathbb{R}$, **with the usual order** (!) provided in <https://www.dpmms.cam.ac.uk/~wtg10/ordinals.html> which is a very nice trick. NB: the reference doesn't prove that all 
+countable ordinals can be represented like that. But it provides a proof that
+there is an uncoutable ordinal if someone needs something less heavy than the
+abstract invocation of the existence of a well-order for any set.
+
+# Misc.
+
+### Countable ordinals
+
+**NOTA.** To use transfinite recursion in usual cases any not countable
+woset would probably work, so $\mathbb{R}$ with such an order (via Zorn lemma)
+would work ? Without the need for ordinals ? Investigate this.
+
+**TODO.** implicit "countable" in the sequel. Good enough for our use cases
+(**TODO** Canto-Bendixon, generated measure, etc.)
+
+Many well-ordered sets have the same structure; for example $\{0,1,2\}$ and
+$\{1,2,3\}$, $\mathbb{N}$ and $2\mathbb{N} =
+\{2n\; | \; n \in N\}$, etc. Among every collection of the well-ordered sets 
+having the same structure, we would like to distinguish a canonical one.
+
+But to begin with, let's formalize the concept of well-ordered sets 
+"having the same structure":
+
+#### Isomorphism of well-orders
+Two well-ordered sets are *isomorphic* if there exist an increasing
+bijection between them.
+
+**TODO:** (finite and strictly countable) ordinals as equivalence classes
+of subsets of $\mathcal{\mathcal{P}(\mathbb{N} \times \mathbb{N})}$, 
+with the induced (well-)order. 
+As a "canonical" well-ordered set associated to any countable well-posed set.
+
+Any relation $R$ on a subset $X$ of $\mathbb{N}$ can be ordered.
 

@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-pandoc -o Enumeration.pdf Enumeration.md
+pandoc --toc -o Enumeration.pdf Enumeration.md
 
