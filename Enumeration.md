@@ -378,6 +378,13 @@ abstract invocation of the existence of a well-order for any set.
 
 # Stationary Principle
 
+#### Every set of ordinals is bounded
+If $X$ is a set of ordinals, there is a $\beta  \in \mathrm{Ord}$ such that
+for any $\alpha \in X$, $\alpha \leq \beta$.
+
+#### Proof
+The ordinal $\beta := \cup X +1$ is an upper bound of $X$.
+
 #### Stationary Principle
 Any non-decreasing and bounded sequence of sets indexed by the class of ordinals 
 is eventually constant:
@@ -395,7 +402,6 @@ $$
 A_{\beta} = G\left(\bigcup_{\alpha < \beta} A_{\alpha}\right)
 \; \mbox{ where } \; \forall X \in \mathrm{V}, \; X \subseteq G(X).
 $$
-
 
 #### Proof
 Let $\mathcal{D}$ be the class of subsets of $A$ defined by
@@ -425,6 +431,10 @@ $\blacksquare$
 
 # Countable ordinals
 
+
+**TODO.** Prove by transfinite induction that the countable ordinals are 
+**exactly** isomorphic to the well-ordered subsets of $\mathbb{R}$, with 
+the usual order?
 (Deprecated ? See <https://www.dpmms.cam.ac.uk/~wtg10/ordinals.html> 
 nevertheless, it's interesting).
 
