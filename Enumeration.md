@@ -15,6 +15,18 @@ header-includes:
 (transfinite, deep) induction, or "proof by induction", "definition by induction"
 (or "transfinite recursion"), etc.
 
+**TODO:** 
+
+  - Continuity on $[0,1]$ implies boundedness: "natural" / "constructive" 
+proof: issue presentation, then back with the tools to make it work?
+Anyway a GREAT example of the need for transfinite (deep) iteration,
+"limits" to break through, etc.
+
+  - Generation of say algebra (by induction); how it does not work for
+    $\sigma$-algebra.
+
+
+
 ### Notations
 
   - $\varnothing$ is the empty set: $\forall x, \; x \not \in \varnothing$,
@@ -364,9 +376,57 @@ countable ordinals can be represented like that. But it provides a proof that
 there is an uncoutable ordinal if someone needs something less heavy than the
 abstract invocation of the existence of a well-order for any set.
 
-# Misc.
+# Stationary Principle
 
-### Countable ordinals
+#### Stationary Principle
+Any non-decreasing and bounded sequence of sets indexed by the class of ordinals 
+is eventually constant:
+let $\left<A_{\alpha} \; | \; \alpha \in \mathrm{Ord}\right>$ 
+be such that $A_{\alpha} \subseteq A_{\beta}$ whenever $\alpha \leq \beta$ 
+and assume the existence of a set $A$ such that $A_{\alpha} \subseteq A$ 
+for any $\alpha$; then there is a $\alpha \in \mathrm{Ord}$ such that 
+$A_{\beta} = A_{\alpha}$ for any $\beta \geq \alpha$.  
+
+#### Remark
+The non-decreasing property of the sequence $A_{\alpha}$ is typically inferred
+from the structure of a transfinite recursion that defines it. For example,
+it is non-decreasing if
+$$
+A_{\beta} = G\left(\bigcup_{\alpha < \beta} A_{\alpha}\right)
+\; \mbox{ where } \; \forall X \in \mathrm{V}, \; X \subseteq G(X).
+$$
+
+
+#### Proof
+Let $\mathcal{D}$ be the class of subsets of $A$ defined by
+$$
+\mathcal{D} :=
+\left\{A_{\beta} \setminus \cup_{\alpha < \beta} A_{\alpha} \in \mathcal{P}(A) 
+\; | \; 
+\beta \in \mathrm{Ord}\right\} \setminus \{\varnothing\}.
+$$
+By the axiom of separation, $\mathcal{D}$ is a set.
+Since $\left<A_{\alpha} \; | \; \alpha \in \mathrm{Ord}\right>$ is non-decreasing, 
+for every $D \in \mathcal{D}$ there is a unique $\beta \in \mathrm{Ord}$ 
+such that $D = A_{\beta} \setminus \cup_{\alpha < \beta} A_{\alpha}$.
+Since the image of $\mathcal{D}$ by this (class) function is exactly the class of
+ordinals
+$$
+X = \{\beta \in \mathrm{Ord} \; | \; \cup_{\alpha < \beta} A_{\alpha} \subset A_{\beta} \; \},
+$$
+by the axiom of replacement, $X$ is actually a set. Let $\alpha$ be the successor
+of this set (the smallest ordinal larger than any ordinal in $X$; it's either
+$\cup X$ or $\cup X +1$);
+now, for any ordinal $\gamma$ larger than $\alpha$ we necessarily 
+have $A_{\gamma} = \cup_{\beta < \gamma} A_{\beta}$ which by transfinite 
+induction proves that $A_{\gamma} = A_{\alpha}$ whenever $\gamma \geq \alpha$.
+$\blacksquare$
+
+
+# Countable ordinals
+
+(Deprecated ? See <https://www.dpmms.cam.ac.uk/~wtg10/ordinals.html> 
+nevertheless, it's interesting).
 
 **NOTA.** To use transfinite recursion in usual cases any not countable
 woset would probably work, so $\mathbb{R}$ with such an order (via Zorn lemma)
