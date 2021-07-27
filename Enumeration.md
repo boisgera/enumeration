@@ -428,6 +428,13 @@ have $A_{\gamma} = \cup_{\beta < \gamma} A_{\beta}$ which by transfinite
 induction proves that $A_{\gamma} = A_{\alpha}$ whenever $\gamma \geq \alpha$.
 $\blacksquare$
 
+**TODO.** Some applications, such as the proof that $\mathrm{V} = \cup_{\alpha} V_{\alpha}$
+and / or that the iterative construction of a $\sigma$-algebra "converges"
+(has a fixed-point).
+
+**TODO.** Mention non-increasing sequence ?
+
+**TODO.** Quote the Baire-Cantor stationary principle (see <https://math.stackexchange.com/questions/1103509/uses-of-ordinals>), where I got the name from ?
 
 # Countable ordinals
 
@@ -437,13 +444,55 @@ $\blacksquare$
 the usual order?
 (Deprecated ? See <https://www.dpmms.cam.ac.uk/~wtg10/ordinals.html> 
 nevertheless, it's interesting).
+**UPDATE.** Not by induction, but its true nonetheless, see <https://risingentropy.com/ordinals-embedded-in-%E2%84%9A-and-%E2%84%9D/>
 
 **NOTA.** To use transfinite recursion in usual cases any not countable
 woset would probably work, so $\mathbb{R}$ with such an order (via Zorn lemma)
 would work ? Without the need for ordinals ? Investigate this.
 
-**TODO.** implicit "countable" in the sequel. Good enough for our use cases
-(**TODO** Canto-Bendixon, generated measure, etc.)
+**TODO.** implicit "countable" in the sequel (?). Good enough for our use cases
+(**TODO** Cantor-Bendixon, generated measure, etc.)
+
+#### Embedding of Well-Ordered Sets in the Real Line
+A well-order set is countable if and only if it is isomorphic to a well-ordered
+subset of $\mathbb{R}$ (endowed with its usual order).
+
+#### Proof
+Let $\left<q_n \; | \; n\in \mathbb{N} \right>$ be an enumeration of
+the rationals i.e. a bijective mapping between $\mathbb{N}$ and $\mathbb{Q}$;
+for example the sequence $$\left<0, -1, 1, -2, -1.5, -0.5, 0.5, 1.5, 2.0,
+-3, -8/3, -7/3, -5/3, -4/3, -2/3,  \dots\right>$$
+
+Let $W$ be a countable set, well-ordered by $\preceq$ and enumerated by
+the sequence $\left<w_n \; | \; n \in \mathbb{N}\right>$. Let $r_0 = q_0$; 
+we define for any $n \in \mathbb{N}$ the sets
+$$
+A_n = \{r_i \; | \; i\leq n \, \wedge \, w_i \prec w_{n+1} \}, \;
+B_n = \{r_i \; | \; i\leq n \, \wedge \, w_{n+1} \prec w_i \}, \;
+$$
+and the real number
+$$
+r_{n+1} = q_m \; \mbox{ where } \;
+m = \min \; \{p \in \mathbb{N} \; | \; 
+\forall \, a \in A_n, \, \forall \, b \in B_n, 
+a \prec q_p \prec b
+\}.
+$$
+This choice is possible at each step since by construction 
+$A_n$ and $B_n$ are disjoint and finite and for any $i \leq n$ and $j \leq n$,
+we have $r_i < r_j$ if and only if $w_i \prec w_j$.
+By induction, the subset $R = \{r_n \; | \; n \in \mathbb{N}\}$ of $\mathbb{R}$
+is a well-ordered subset of $\mathbb{R}$ which is isomorphic to $W$.
+
+Conversely, if $R$ is a countable well-ordered subset of $\mathbb{R}$,
+we may associate to any $r \in R$ the first rational $q$ of the sequence
+$\left<q_n \; | \; n \in \mathbb{N} \right>$ such that
+$r < q < \next_R(\left[0_R, r\right[)$. Since the mapping is one-to-one,
+the set $W$ is necessarily countable.
+
+
+Misc. / Unsorted
+================================================================================
 
 Many well-ordered sets have the same structure; for example $\{0,1,2\}$ and
 $\{1,2,3\}$, $\mathbb{N}$ and $2\mathbb{N} =
