@@ -317,6 +317,11 @@ less of a practical issue, I can forget about it (avoid yak shaving).
 To summarize: we are not really interested in the TI result for 
 well-ordered classes, but merely in the "limit" case of TI for sets.
 
+**Note.** The transfinite recursion on classes would not solve the other issue
+that we have that we need a reference well-ordered "class" that is large 
+enough to contain a copy of every other well-ordered set as a proper initial
+segment.
+
 
 
 
