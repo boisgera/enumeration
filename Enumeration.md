@@ -301,6 +301,7 @@ So far, I don't know. Possible leads:
     **TODO.** Revisit with the classic proof, maybe this is an artifact of
     my specific (segment-based) proof. Nota: does it mean that my definition
     of well-ordered and the classic one are not equivalent on classes?
+    See Jech proof of TI on ordinals.
 
 **TODO.** Search for "well-ordered classes"? Leads:
 
