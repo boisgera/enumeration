@@ -304,8 +304,6 @@ So far, I don't know. Possible leads:
 
   - <https://math.stackexchange.com/questions/2156812/why-doesnt-it-work-for-well-ordered-proper-classes>
 
-  - 
-
 Note that if in the induction step, we limit ourseves to initial segments that
 are sets, then the transfinite induction fails for classes "larger" than
 $\mbox{Ord}$ (say ordinals plus one extra point). Soooo, since we are not
