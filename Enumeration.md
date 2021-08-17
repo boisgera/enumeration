@@ -298,6 +298,9 @@ So far, I don't know. Possible leads:
     well-ordered class. Mmm therefore $\mbox{Ord}$ is the "minimal" well-ordered
     proper class somehow).
 
+    **TODO.** Revisit with the classic proof, maybe this is an artifact of
+    my specific (segment-based) proof.
+
 **TODO.** Search for "well-ordered classes"? Leads:
 
   - <http://jdh.hamkins.org/transfinite-recursion-as-a-fundamental-principle-in-set-theory/>
