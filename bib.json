@@ -1,0 +1,21 @@
+[
+	{
+		"id": "Jec03",
+		"type": "book",
+		"publisher": "Springer",
+		"title": "Set Theory: The Third Millennium Edition",
+		"author": [
+			{
+				"family": "Jech",
+				"given": "Thomas"
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"2003"
+				]
+			]
+		}
+	}
+]

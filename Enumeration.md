@@ -221,21 +221,107 @@ $s < y$ for every $s \in S$, a contradiction with the fact that $x$ is the
 minimum among those elements. $\blacksquare$
 
 #### Transfinite Induction
-Let $W$ be a linearly ordered set and let $A \subseteq W$. 
-If for every proper initial segment $S$ of $W$ there is a 
+Let $X$ be a linearly ordered set and let $A \subseteq X$. 
+If for every proper initial segment $S$ of $X$ there is a 
 successor $\next(S)$ and if
-$S \subseteq A$ implies $\next(S) \in A$ then $A = W$.
+$S \subseteq A$ implies $\next(S) \in A$ then $A = X$.
 
-#### Proof 
-Consider the collection of initial segments included in $A$; its union $S$ is
-an initial segment included in $A$, thus it is the largest
-element of the collection. 
-If $S \subset W$, $\next(S) \in A$, hence $S \cup \{\next(S)\}$ is initial 
-segment of $W$ larger than $S$ and included in $A$,
-which yields a contradiction. Thus $S = W$, then $A= W$ and the theorem
-holds. $\blacksquare$
+#### Terminology
+A linearly ordered set where every proper initial segment has a successor
+is said to be *well-ordered*. The property that $S \subseteq A$ is called
+the *induction hypothesis* and the proof that the induction hypothesis
+implies $\next(S) \in A$ is called the *induction step*.
 
-**TODO:** mention "proof by induction" and properties as a corollary.
+#### Proof (Transfinite Induction) 
+Let $S$ be the union of all initial segments of $X$ included in $A$. 
+As a union of initial segments, $S$ is an initial segment; 
+as a union of subsets of $A$, it is included in $A$.
+Thus, it is the largest initial segment included in $A$.
+Now, if $S$ was proper, $\next(S)$ would exist and $S \cup \{\next(S)\}$ 
+would also be initial segment of $X$.
+Moreover, since by the induction step $\next(S) \in A$, 
+$S \cup \{\next(S)\}$ would also be included in $A$.
+The set $S$ would therefore not be the largest initial segment of $X$ included in $A$ and
+we would have a contradiction. Hence, $S$ is not proper but $S=X \subset A$. 
+$\blacksquare$
+
+**TODO:** mention "proof by induction" and properties as a corollary. Here?
+
+
+## Transfinite Induction on Classes
+
+(This is a digression, not required at this stage, but heavily related to
+the statement we have just made. TI on classes is genuinely useful when we
+don't know how "deep" we need to go on to build some stuff).
+
+**TODO.** define "class" (notation "$x \in C$" to mean $\phi(x)$ ; see what
+operations are legit with this purely syntactic construct ; also need
+"class term" i.e. parametrized class? Dunno.)
+
+#### Transfinite Induction
+Let $X$ be a linearly ordered class and let $A \subseteq X$. 
+If for every proper initial segment $S$ of $X$ there is a 
+successor $\next(S)$ and if
+$S \subseteq A$ implies $\next(S) \in A$ then $A = X$.
+
+### Discussion
+
+First let's make sure that the statement make sense. The order $\leq$ shall
+be interpreted as a subclass of $X \times X$ which satisfies the three axioms
+of order. Everything here can be translated to predicates, this is fine.
+The well-ordering property on $X$ and the definition of $\next$ are also 
+non-issues.
+
+Now, is it true? I know for a fact that it works in the special (important) case 
+$X = \mbox{Ord}$ [@Jec03, p. 21] but I'd like to delay the introduction of 
+ordinals at least in the statement of results (in proofs, that would be less
+of an issue), so even if the statement for ordinals is probably enough for
+every practical use case, its generalisation (to arbitrary well-ordered classes)
+would paradoxically be simpler.
+
+So far, I don't know. Possible leads:
+
+  - Use the existing result for ordinals somehow (???),
+
+  - Use the axiom of foundation and the traces of $X$, $A$, etc. on $V_{\alpha}$
+    to get sets instead of classes and use the result for well-ordered sets?
+    Doesn't seem to work when I detail the approch, because the $\next$ in 
+    $X$ has no reason to stay in the same $X_{\alpha}$.
+
+  - Adapt the proof used for sets. Here we quickly run into a problem since
+    defining the initial segment $S$ requires that we would use an existential
+    quantifier over some segments of $X$ that may be proper classes and
+    we are not allowed to do that (note that if the class is $\mbox{Ord}$,
+    all its proper initial segments are sets; but does it hold in general?
+    Not obvious at all! No, it does not: just add at the end of $\mbox{Ord}$ 
+    a "new" element and then $\mbox{Ord}$ is a proper initial segment of this
+    well-ordered class. Mmm therefore $\mbox{Ord}$ is the "minimal" well-ordered
+    proper class somehow).
+
+**TODO.** Search for "well-ordered classes"? Leads:
+
+  - <http://jdh.hamkins.org/transfinite-recursion-as-a-fundamental-principle-in-set-theory/>
+
+  - <https://math.stackexchange.com/questions/2156812/why-doesnt-it-work-for-well-ordered-proper-classes>
+
+  - 
+
+Note that if in the induction step, we limit ourseves to initial segments that
+are sets, then the transfinite induction fails for classes "larger" than
+$\mbox{Ord}$ (say ordinals plus one extra point). Soooo, since we are not
+here to fuck with classes for the pleasure, but only to have a version of the
+TI that allows us to enumerate stuff at some arbitrary (unknown) depth,
+we would naturally limit ourselves to the segments that are sets.
+And thus this "hybrid" version fails for general well-ordered classes.
+I still don't know if the relaxed/generalized version holds, but this is
+less of a practical issue, I can forget about it (avoid yak shaving).
+
+To summarize: we are not really interested in the TI result for 
+well-ordered classes, but merely in the "limit" case of TI for sets.
+
+
+
+
 
 ## Definition by Induction: Transfinite Recursion
 
@@ -493,6 +579,24 @@ the set $W$ is necessarily countable.
 
 Misc. / Unsorted
 ================================================================================
+
+Enumeration
+--------------------------------------------------------------------------------
+
+Préciser le concept, équivalent à la donnée d'un bon ordre sur un ensemble :
+une "suite" (généralisée) à valeurs dans un ensemble X, indexée par un ordinal
+(ou un woset ...) tel que tout élement de X est présent une fois et une seule
+dans les valeurs de la suite.
+
+C'est *presque* trivialement équivalent à la donnée d'un well-order, mais
+l'image mentale est très différente.
+
+Probablement mieux d'indexer sur un ordinal (sur un "segment initial de
+nombres entiers généralisés"), ça étend plus naturellement la notion de "suite"
+qu'on a en tête (indexée par des entiers).
+
+
+--------------------------------------------------------------------------------
 
 Many well-ordered sets have the same structure; for example $\{0,1,2\}$ and
 $\{1,2,3\}$, $\mathbb{N}$ and $2\mathbb{N} =
