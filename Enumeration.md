@@ -299,7 +299,8 @@ So far, I don't know. Possible leads:
     proper class somehow).
 
     **TODO.** Revisit with the classic proof, maybe this is an artifact of
-    my specific (segment-based) proof.
+    my specific (segment-based) proof. Nota: does it mean that my definition
+    of well-ordered and the classic one are not equivalent on classes?
 
 **TODO.** Search for "well-ordered classes"? Leads:
 
