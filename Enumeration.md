@@ -36,20 +36,26 @@ Anyway a GREAT example of the need for transfinite (deep) iteration,
   - $A \subset B$: $A$ is strictly included in $B$ 
     ($A$ is included in $B$ but differs from it).
 
-For linearly ordered sets $X$:
+In a linearly ordered set $X$:
 
   - $0_X = \min X$ (if it exists), $1_X = \min X \setminus \{0\}$ (if it exists),
     etc. We drop the $X$ subscript when the context is clear.
 
-  - $\left[x, y\right[ = \{z \in X \; | \; x \leq z < y\}$,
+  - Notations for the intervals apply as usual and combine with the previous
+    convention. A $X$ subscript is added when necessary. For example,
+    $\left[x, y\right[_X = \{z \in X \; | \; x \leq z < y\}$. Of particular
+    interest:
+    $$
+    \left[0, x\right[ = \{y \in X \; | \; y < x\}.
+    $$
 
-  - 
+
 
 ### Well-ordered Sets
 
 #### Initial segment
 A subset $S$ of an ordered set $X$ is an *initial segment* of
-$X$ if any element of $X$ less than some element of $S$
+$X$ if any element of $X$ less than or equal to some element of $S$
 belongs to $S$:
 $$
 \forall x \in X, \forall s \in S, \; (x \leq s \rightarrow x \in S)
@@ -72,7 +78,7 @@ $S=\left]-\infty, x\right[$ otherwise.
 A linearly ordered set $X$ is *well-ordered* if for every proper initial
 segment $S$ of $W$, there is a $x \in X$ such that
 $$
-S = S_x := \{s \in X \; | \; s < x\}. 
+S = \left[0, x \right[ = \{s \in X \; | \; s < x\}. 
 $$
 
 This is not totally obvious at first sight, but this is equivalent to
@@ -88,6 +94,116 @@ equivalently a "next" point).
 I feel that this stuff may be more intuitive than the formulation above:
 the segments are the "progress bar" of the enumeration and as long as
 we're not done, we can always extend the progress bar by "one tick".
+
+OK, now from now on, our foundational definition of well-ordered set is
+based on the concept of successor
+
+#### Successor
+Let $X$ be a linearly ordered set.
+We define the *successor* of a subset $A$ of $X$ (whenever it exists) as
+$$
+\next(A) = \min \, \{x \in x \; | \; \forall \, a \in A, \, a < x\}.
+$$
+
+#### Note
+Our terminology is a slight deviation of the norm, which actually
+ends up being a generalization: successors are usually associated 
+to elements of $X$, not subsets. We recover the classic definition 
+by setting (as you may 
+expect!)
+$$
+\next(x) := \next(\{x\}).
+$$
+
+(Nice slot to display an example why the notion attached to subset is richer
+than the one attached to elements: consider the successor of $\left[0, 1\right[$
+in $\mathbb{R}$; there is no way to define this concept from the "classic"
+successor, we need to consider all elements of the set "at once" to be able
+to go beyond $\left[0, 1\right[$).
+
+And then:
+
+#### Well-ordered Set
+A linearly ordered set $X$ is *well-ordered* if and only if every proper initial
+segment has a successor.
+
+Which can handily be reformulated as (the totally equivalent and often handy):
+
+#### Well-ordered Set
+A linearly ordered set $X$ is *well-ordered* if and only if for any subset
+$S$ of $X$
+$$
+\mbox{$S$ is an initial proper segment}
+\; \longleftrightarrow \;
+\exists \, x \in X, \; S = \left[0, x\right[.
+$$
+
+(every set $\left[0, x\right[$ is a proper initial segment, that's the 
+reverse implication which is interesting.)
+
+We still have a couple more alternate characterization of well-ordered sets.
+Another version is obtained by "dualization", and each of the two equivalent
+statement gives birth to another one by generalization. The dualized + generalized
+statement ends up being the modern, orthodox, definition of well-ordered set.
+
+#### Final Segment
+A subset $S$ of an ordered set $X$ is a *final segment* of
+$X$ if any element of $X$ greater than or equal to some element of $S$
+belongs to $S$:
+$$
+\forall x \in X, \forall s \in S, \; (x \geq s \rightarrow x \in S)
+$$
+(or for short $x \geq s \in S \rightarrow x \in S$). 
+The final segment $S$ is *proper* if $S \subset X$.
+
+(Equivalently, $S$ is a final segment iff it is an initial segment for
+$X$ endowed with $\geq$ instead of $\leq$.)
+
+#### Well-posed set (Dualization)
+A linearly ordered set $X$ is *well-ordered* if and only if every non-empty 
+final segment has a minimum.
+
+The "issue" with this formalization is that it's more distant from the use
+case of TI. The advantage is that it does require the new concept of $\next$
+in our order theory toolkit, $\min$ can be used directly instead. We notice
+here the markers of dualization in every concept used: 
+initial/final, $\leq$/$\geq$, proper/non-empty, etc. 
+
+#### Proof
+The dualized version clearly implies the initial one. Conversely, if
+$S$ is a non-empty final segment of $X$, the set $T$ of elements of $X$ that
+are less than every element of $S$ is a proper initial segment of $X$.
+Now, since the set of elements of $X$ that are more than every element of
+$T$ is equal to $S$, the successor of $T$ is the minimum of $S$.
+
+Now, we can generalize both versions.
+
+#### Well-posed set (Generalization)
+A linearly ordered set $X$ is well-ordered if and only if every set with
+a strict upper bound has a successor.
+
+#### Proof
+Since it's an obvious generalization, we only need to prove that the original
+definition implies this property. The sketch of the process is the following:
+associate to the original set $A$ the set $S$ of $s$ such that there is a $a \in A$
+with $s \leq a$. This is a proper initial segment of $X$ and its set of
+strict upper bounds is the same as the one of $A$; thus $A$ has a successor.
+$\blacksquare$
+
+#### Well-posed set (Dualization + Generalization)
+A linearly ordered set $X$ is well-ordered if and only if every non-empty set 
+has a minimum.
+
+#### Proof
+Since it's an obvious generalization, we only need to prove that the original
+definition implies this property. The sketch of the process is the following:
+associate to the original set $A$ the set $S$ of $s$ such that there is a $a \in A$
+with $a \leq s$. This is a non-empty final segment of $X$ and its set of
+lower bounds is the same as the one of $A$; thus $A$ has a minimum.
+$\blacksquare$
+
+
+**TODO.** Clean-up the sequel (I guess remove mostly).
 
 #### Well-posed set -- Alternate characterization
 An ordered set $X$ is well-posed if and only if any non-empty subset
@@ -254,9 +370,54 @@ $\blacksquare$
 the statement we have just made. TI on classes is genuinely useful when we
 don't know how "deep" we need to go on to build some stuff).
 
+### About Classes (redux)
+
 **TODO.** define "class" (notation "$x \in C$" to mean $\phi(x)$ ; see what
 operations are legit with this purely syntactic construct ; also need
-"class term" i.e. parametrized class? Dunno.)
+"class term" i.e. parametrized class? Dunno.) My redux so far: classes
+are a handy syntactic constructs for predicates. If $\phi$ is predicate
+with a single free variable $x$, we may instead decide to write
+"$x \in \Phi$" to mean that $\phi(x)$ holds. This "abuse" leads use to
+extend other notations to classes, for example $x \in \Phi \cup \Psi$
+means $\phi(x) \vee \psi(x)$ and so on. Some things cannot be done:
+$\Phi \in \Psi$ means nothing in general; classes cannot *a priori* be
+considered elements of sets (or classes). But $\Phi \subset \Psi$ is a
+non-issue: it's true iff $\phi(x) \to \psi(x)$
+
+(Nota: capital greek letters may be a great notation for classes, 
+with the corresponding small letter for the associated predicate.)
+
+Another notation: the class-builder:
+$$
+\Phi = \{x \; | \; \phi(x)\}
+$$
+
+Now the thing is that some classes are not sets since (unbounded) comprehensions
+as issues. Remember that only separation (or bounded comprehension) is safe:
+for any set $A$, the set-builder notation defines a (unique) set:
+$$
+\{x \in A \; | \; \phi(x)\}
+$$
+So, OK, some classes "are not" (do not define) sets. They are called "proper 
+classes". At this stage with our definition of classes, we would also have
+the converse issues: some sets would not be classes. And this is not something
+we are ready to accept, so we need to generalize a bit. The problem at the
+moment is that our classes are *definable*, associated to sentences of the
+language and this language has a countable numbe of terms, so we cannot
+mechanically describe say all real numbers! What we could do at this stage
+is describe definable sets, which are not all sets. So to solve this,
+we *parametrize* our classes with arbitrary set variables:
+we accept any predicate with some distinguished free variable (say $x$)
+and $n$ extra slots. Then for any sets $A_1, A_2, \dots, A_n$, we 
+can define the (parametrized) class $\Phi$ with
+$$
+\mbox{"$x \in \Phi$"}
+\; \leftrightarrow \;
+\phi(x, A_1, \dots, A_n).
+$$
+As an obvious consequence: every set "is" not a class: pick any set $A$ and
+consider the class associated to the predicate $x \in A$. That's it!
+
 
 #### Transfinite Induction
 Let $X$ be a linearly ordered class and let $A \subseteq X$. 
@@ -322,16 +483,24 @@ less of a practical issue, I can forget about it (avoid yak shaving).
 To summarize: we are not really interested in the TI result for 
 well-ordered classes, but merely in the "limit" case of TI for sets.
 
-**Note.** The transfinite recursion on classes would not solve the other issue
+**Note.** The transfinite induction on classes would not solve the other issue
 that we have that we need a reference well-ordered "class" that is large 
 enough to contain a copy of every other well-ordered set as a proper initial
 segment.
 
+**Update.** OK, the general result works AFAICT, with totally elementary
+methods. The pb was an artifact of our proof, but if instead we prove that 
+"well-ordered in terms of s.i.p." implies "classically well-ordered" 
+(by dualization then generalization, which only involves "one class at a type"), 
+then the classic demonstration (used for woset, for the class of ordinals in @Jec03)
+works without any issue AFAICT.
 
-
-
+So we have a general induction principle for woclasses, nice :)
 
 ## Definition by Induction: Transfinite Recursion
+
+**TODO.** Consider general class version on woclasses? Not merely ordinal
+(which works)? Would it work? Would it be interesting/simpler to state?
 
 (aka transfinite *recursion*). Merely an application of transfinite induction
 that establishes existence and uniquemeness of a mathematical object, i.e. two
