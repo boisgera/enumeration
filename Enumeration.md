@@ -170,11 +170,13 @@ here the markers of dualization in every concept used:
 initial/final, $\leq$/$\geq$, proper/non-empty, etc. 
 
 #### Proof
-The dualized version clearly implies the initial one. Conversely, if
-$S$ is a non-empty final segment of $X$, the set $T$ of elements of $X$ that
-are less than every element of $S$ is a proper initial segment of $X$.
-Now, since the set of elements of $X$ that are more than every element of
-$T$ is equal to $S$, the successor of $T$ is the minimum of $S$.
+Given that the set of strict upper bounds of any subset of $X$ is a final 
+segment of $X$, the dualized version of well-orderedness clearly implies 
+the initial one. 
+Conversely, if $S$ is a non-empty final segment of $X$, 
+the set $T$ of of strict lower bounds of $S$ is a proper initial segment of $X$.
+Now, since the set of strict upper bounds of $T$ is equal to $S$, 
+the successor of $T$ is the minimum of $S$.
 
 Now, we can generalize both versions.
 
@@ -361,6 +363,31 @@ The set $S$ would therefore not be the largest initial segment of $X$ included i
 we would have a contradiction. Hence, $S$ is not proper but $S=X \subset A$. 
 $\blacksquare$
 
+#### Alternate[^alt-proof-TI-note] Proof (Transfinite Induction) {#alt-proof-TI}
+Assume that $A \subset X$.
+Let $B$ be the set of all $b \in X$ for which there is a 
+$x \in X \setminus A$ such that $x \leq b$. This set if a non-empty final 
+segment of $X$; its minimum exists iff the minimum of 
+$X \setminus A$ exists and then they are the same[^details]. 
+The set $S$ composed of all strict lower bounds of $B$ is a 
+proper initial subset of $X$; by the induction step, its successor is in $A$.
+But since this set of strict upper bounds of $S$ is $B$, its successor is the 
+minimum of $B$, and thus the minimum of $X\setminus A$ and 
+we end up with a contradiction. Hence, the initial assumption is false and
+$A = X$.
+$\blacksquare$
+
+[^details]: The set $B$ is included in $X\setminus A$
+and every element $b$ of $B$ that does not belong to $X \setminus A$ satisfies 
+$x < b$ for some $b \in B$, so no such $b$ can be a minimum of $B$.
+
+[^alt-proof-TI-note]: the alternate proof is arguably more complex, 
+but this version also works when transfinite induction is performed 
+on well-ordered *classes*, not merely sets. It is actually made of the
+expansion of the proof that the existence of a successor for every proper 
+initial segment implies the existence of a minimum for any empty set, followed
+by the classic one-liner proof of transfinite induction for well-ordered classes.
+
 **TODO:** mention "proof by induction" and properties as a corollary. Here?
 
 
@@ -369,6 +396,8 @@ $\blacksquare$
 (This is a digression, not required at this stage, but heavily related to
 the statement we have just made. TI on classes is genuinely useful when we
 don't know how "deep" we need to go on to build some stuff).
+
+
 
 ### About Classes (redux)
 
@@ -425,7 +454,10 @@ If for every proper initial segment $S$ of $X$ there is a
 successor $\next(S)$ and if
 $S \subseteq A$ implies $\next(S) \in A$ then $A = X$.
 
-### Discussion
+#### Proof
+See [the (alternate) proof for sets](#alt-proof-TI), which works verbatim here.
+
+### Discussion (OBSOLETE)
 
 First let's make sure that the statement make sense. The order $\leq$ shall
 be interpreted as a subclass of $X \times X$ which satisfies the three axioms
