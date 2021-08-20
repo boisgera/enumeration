@@ -1,5 +1,43 @@
 [
 	{
+		"id": "RE",
+		"type": "post-weblog",
+		"container-title": "Rising Entropy",
+		"title": "What ordinals can be embedded in $\\mathbb{Q}$ and $\\mathbb{R}$?",
+		"URL": "https://risingentropy.com/ordinals-embedded-in-%e2%84%9a-and-%e2%84%9d/",
+		"accessed": {
+				"date-parts": [
+						[
+								"2021",
+								8,
+								20
+						]
+				]
+		}
+},
+	{
+		"id": "Gow",
+		"type": "article",
+		"language": "English",
+		"title": "Ordinals and Ordinal Hierarchies –  A beginner's guide to countable ordinals",
+		"URL": "https://www.dpmms.cam.ac.uk/~wtg10/ordinals.html",
+		"author": [
+				{
+						"family": "Gowers",
+						"given": "Timothy"
+				}
+		],
+		"accessed": {
+				"date-parts": [
+						[
+								"2021",
+								8,
+								20
+						]
+				]
+		}
+},
+	{
 		"id": "Jec03",
 		"type": "book",
 		"publisher": "Springer",
