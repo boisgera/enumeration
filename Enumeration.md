@@ -733,6 +733,8 @@ and / or that the iterative construction of a $\sigma$-algebra "converges"
 
 # Countable ordinals
 
+Sources: [@Gow], [@RE]
+
 
 **TODO.** Prove by transfinite induction that the countable ordinals are 
 **exactly** isomorphic to the well-ordered subsets of $\mathbb{R}$, with 
@@ -960,3 +962,4 @@ As a "canonical" well-ordered set associated to any countable well-posed set.
 
 Any relation $R$ on a subset $X$ of $\mathbb{N}$ can be ordered.
 
+# Bibliography
