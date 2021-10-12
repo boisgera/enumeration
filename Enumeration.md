@@ -785,6 +785,140 @@ $\left<q_n \; | \; n \in \mathbb{N} \right>$ such that
 $r < q < \next_R(\left[0_R, r\right[)$. Since the mapping is one-to-one,
 the set $W$ is necessarily countable.
 
+(Mostly) Descriptive Approach to Deep Enumeration
+================================================================================
+
+**Idea:** postulate the existence of a class of ordinals, with the minimum 
+number of ppties that we need to effectively work (be able to prove TI, TR, etc.).
+This EXCLUDES an explicit representation of ordinals and the fact that $<$
+is $\subset$ for example; we should NOT have to worry about the vertigo induced
+by the nesting of ordinals. So there will be some things we won't be "able" to
+state: for example (set/proper) initial segments of the class of ordinals
+won't "be" ordinals (we won't *know* that). And that's a good thing, less
+things to consider and we never *need* that.
+
+Nota: actually we can explicit the class of ordinals, as "hereditarly transitive
+sets", and explain the abuse of notation $\alpha \in \mathrm{Ord}$ and then
+state the ppties we need. Just, we won't prove it and we don't encourage the
+reader to look into this part. 
+
+Nota: we could also "build" the ordinals after the fact (by TR) if we postulate 
+that such a class exists.
+
+
+### Definition of ordinal numbers
+
+#### Note
+
+We present here the definition due to Von Neumann of the ordinals.
+This explicit construction does not matter in the least; all that
+matters is the descriptive definition of the ordinals given
+[in the next section][Properties of ordinal numbers]. 
+We won't prove that the definition of ordinals given here satisfy 
+these properties.
+
+#### Definitions
+A set $x$ is *transitive* if the following property holds:
+$$
+T(x) := \forall \, y \, \forall \, z \, ((z \in y \, \wedge \, y \in x) \to z \in x)
+$$
+It is *hereditarily transitive* if the following property holds:
+$$
+\mathrm{Ord}(x) := T(x) \, \wedge \, \forall \, y \, (y \in x \to H(y)).
+$$
+
+We also use the notation $\mathrm{Ord}$ to denote the collection (technically, 
+defined by a property and thus a *class*) of sets $\alpha$ which are hereditarily 
+transitive. In other words, we (ab)use the notation "$\alpha \in \mathrm{Ord}$" 
+as syntaxic sugar for the formula "$\mathrm{Ord}(\alpha)$". But this is only a notation; 
+we can prove that the collection $\mathrm{Ord}$ is not a set in ZFC (it is a 
+*proper* class). The adoption of this notation for classes gives some extended
+meaning to some usual set predicates and operations such as $\subseteq$, $\cup$, 
+$\setminus$, etc. which are now relevant for classes and not merely sets.
+
+We endow $\mathrm{Ord}$ with a relation $\leq$ defined by 
+$$
+\alpha \leq \beta \; \leftrightarrow \; \alpha \in \beta \, \vee \, \alpha = \beta.
+$$
+
+### Descriptive properties of ordinal numbers
+
+
+At this stage I postulate that this is all we need to accept/know about ordinals
+to get all the operational tools we need:
+
+> The structure $(\mathrm{Ord}, \leq)$ of ordinals is a well-ordered class
+where every proper initial segment is a set: it is linearly ordered by $\leq$
+and every proper initial segment is a set which has a successor.
+
+### TODO:
+
+What is the laudry list that we have to do now? Check that we can prove:
+
+  - transfinite induction
+
+  - transfinite recursion
+
+  - every well-ordered set is isomorphic to one (unique) ordinal 
+
+  - stationary principle (?)
+
+
+
+### Transfinite induction
+
+#### Transfinite induction on ordinals
+Let $A \subseteq \mathrm{Ord}$ be a class of ordinals. 
+If for every proper initial segment $S$ of $\mathrm{Ord}$,
+$S \subseteq A$ implies $\next(S) \in A$, then $A = \mathrm{Ord}$.
+
+#### Proof
+Let
+$$
+S = \{\alpha \in \mathrm{Ord} \; | \; \forall \, \beta \in \mathrm{Ord} \setminus A, \, \alpha < \beta \,\}.
+$$
+It is clear that $S$ is an initial segment of $\mathrm{Ord}$ which is also a subclass of $A$.
+If $S$ was proper, by assumption $\next(S)$ would belong to $A$, but then it would also
+satisfy the property $\forall \, \beta \in \mathrm{Ord} \setminus A, \, \next(S) < \beta$
+and therefore would belong to $S$, yielding a contradiction. Thus, the initial segment $S$ is not proper: 
+$S=\mathrm{Ord}$ and hence $A = \mathrm{Ord}$. $\blacksquare$
+
+### Transfinite recursion (TODO)
+
+Let $V$ denote the class of all sets. When $A$ and $B$ are classes, a 
+(class) function 
+$f:A \to B$ is a class of pairs $(a, b)$ such that $a\in A$ and $b\in B$.
+
+#### Transfinite recursion
+Let $F: V \to V$. There is a unique function $f: \mathrm{Ord} \to V$ such that
+for any proper initial segment $S$ of $\mathrm{Ord}$,
+$$
+f(\next(S)) = F(f|_S).
+$$
+
+#### Technicality
+Since any proper initial segment $S$ of $\mathrm{Ord}$ is a set, by the axiom
+of replacement $f|_S$ is not merely a class but is a set. Thus for any candidate
+(class) function $f$, $f|_S$ is a (set) function, belongs to $V$ and the 
+statement of the theorem makes sense.
+
+#### Proof
+Let $A \subset \mathrm{Ord}$ be the class of ordinals $\alpha$ such that
+there is a unique function $f_{\alpha}: \left[0, \alpha\right[ \to V$ such that
+for any proper initial segment $S$ of $\left[0, \alpha \right[$, 
+$f(\next(S)) = F(f|_S)$. Let $T \subset A$ be a proper initial segment of 
+$\mathrm{Ord}$.
+
+ 1. If $T = \left[0, 0\right[$, then $\next(T) = 0$. There is a unique function
+    $f$ **TODO**
+
+
+$\blacksquare$
+
+### Isomorphism (TODO)
+
+
+
 
 Misc. / Unsorted
 ================================================================================
