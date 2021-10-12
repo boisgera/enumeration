@@ -849,7 +849,7 @@ $$
 At this stage I postulate that this is all we need to accept/know about ordinals
 to get all the operational tools we need:
 
-> The structure $(\mathrm{Ord}, \leq)$ of ordinals is a well-ordered class
+> The structure $(\mathrm{Ord}, \leq)$ of ordinals is a well-ordered proper class
 where every proper initial segment is a set: it is linearly ordered by $\leq$
 and every proper initial segment is a set which has a successor.
 
