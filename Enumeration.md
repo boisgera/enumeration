@@ -826,7 +826,7 @@ T(x) := \forall \, y \, \forall \, z \, ((z \in y \, \wedge \, y \in x) \to z \i
 $$
 It is *hereditarily transitive* if the following property holds:
 $$
-\mathrm{Ord}(x) := T(x) \, \wedge \, \forall \, y \, (y \in x \to H(y)).
+\mathrm{Ord}(x) := T(x) \, \wedge \, \forall \, y \, (y \in x \to T(y)).
 $$
 
 We also use the notation $\mathrm{Ord}$ to denote the collection (technically, 
@@ -900,21 +900,52 @@ $$
 
 #### Technicality
 Since any proper initial segment $S$ of $\mathrm{Ord}$ is a set, by the axiom
-of replacement $f|_S$ is not merely a class but is a set. Thus for any candidate
+of replacement $f|_S$ is a set (and not merely a class). Thus for any candidate
 (class) function $f$, $f|_S$ is a (set) function, belongs to $V$ and the 
 statement of the theorem makes sense.
 
 #### Proof
-Let $A \subset \mathrm{Ord}$ be the class of ordinals $\alpha$ such that
-there is a unique function $f_{\alpha}: \left[0, \alpha\right[ \to V$ such that
-for any proper initial segment $S$ of $\left[0, \alpha \right[$, 
-$f(\next(S)) = F(f|_S)$. Let $T \subset A$ be a proper initial segment of 
-$\mathrm{Ord}$.
+Let $A \subseteq \mathrm{Ord}$ be the class of ordinals $\alpha$ such that
+the transfinite recursion holds on $[0, \alpha]$:
+there is a unique function $f_{\alpha}: \left[0, \alpha\right] \to V$ such that
+for any proper initial segment $S$ of $\left[0, \alpha \right]$, 
+$f(\next(S)) = F(f|_S)$. 
 
- 1. If $T = \left[0, 0\right[$, then $\next(T) = 0$. There is a unique function
-    $f$ **TODO**
+Let $T \subset A$ be a proper initial segment of $\mathrm{Ord}$.
 
+ 1. If $T = \varnothing$, then $\next(T) = 0$. There is a unique proper initial
+    segment $S$ of $[0, 0]$: $S=\varnothing$. Since for any function $f$, 
+    $f|_{\varnothing} = \varnothing$, $f_0: [0, 0] \to V$ is a solution of the 
+    transfinite recursion problem on $[0, 0]$ if and only if
+    $f_0(0) = F(f_0|_{\varnothing}) = F(\varnothing)$; this equation defines $f_0$ 
+    uniquely.
 
+ 2. If $T = [0, \alpha]$ for some $\alpha$, then $\next(T) = \beta + 1$. 
+    An proper initial segment $S$ of $T$ is either a proper initial segment
+    of $[0, \alpha]$ or $[0,\alpha]$ itself. In the former case, we have 
+    necessarily $f_{\alpha+1}|_{[0, \alpha]} = f_{\alpha}$; in the latter,
+    $f_{\alpha+1}(\alpha+1) = F(f_{\alpha+1}|_{[0, \alpha]}) = F(f_{\alpha})$.
+    This uniquely defines the function $f_{\alpha+1}$.
+ 
+ 3. Otherwise, $T = \left[0, \alpha\right[$ for some $\alpha$ and 
+    $T = \cup_{\beta < \alpha} [0, \beta]$. We thus necessarily have
+    $f_{\alpha}|_{\left[0,\alpha\right[} = \cup_{\beta < \alpha} f_{\beta}$;
+    this sequence of sets is increasing and defines a unique function
+    which meets the conditions of transfinite recursion for all initial 
+    segments of $\left[0, \alpha\right[$. Combining this definition 
+    with the (necessary) $f_{\alpha}(\alpha) = 
+    F(f_{\alpha}|_{\left[0,\alpha\right[})$ yields a unique $f_{\alpha}$
+    which satisfies transfinite recursion equations on $[0,\alpha]$.
+
+Finally, since for any $\alpha$ a function $f:\mathrm{Ord} \to V$ solution
+of the transfinite recursion equation on $\mathrm{Ord}$ needs to satisfy
+$f|_{[0, \alpha]} = f_{\alpha}$, we have to define $f$ by $f(\alpha)
+= f_{\alpha}(\alpha)$; this definition provides $f|_{[0,\alpha]} = f_{\alpha}$.
+Since for any proper initial segment $S=\left[0,\alpha \right[$
+of $\mathrm{Ord}$ we have
+$f(\alpha) = f_{\alpha}(\alpha) = 
+F(f_{\alpha}|_{\left[0,\alpha\right[}) = F(f|_{\left[0,\alpha\right[})$,
+$f$ is a solution to the transfinite recursion on $\mathrm{Ord}$.
 $\blacksquare$
 
 ### Isomorphism (TODO)
