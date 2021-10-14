@@ -796,8 +796,13 @@ This EXCLUDES an explicit representation of ordinals and the fact that $<$
 is $\subset$ for example; we should NOT have to worry about the vertigo induced
 by the nesting of ordinals. So there will be some things we won't be "able" to
 state: for example (set/proper) initial segments of the class of ordinals
-won't "be" ordinals (we won't *know* that). And that's a good thing, less
-things to consider and we never *need* that.
+won't "be" ordinals (we won't *know* that) and as a consequence we can merely
+state that any well-ordered set is isomorphic to a proper initial segment of
+the ordinals and not to an ordinal. And that's a good thing, less
+things to consider and we never *need* that. I believe that the nesting of
+ordinals is (very) hard to understand and almost entirely irrelevant for
+the application of ordinals. But that requires little unorthodox 
+twists to define things such as the order type, etc.
 
 Nota: actually we can explicit the class of ordinals, as "hereditarly transitive
 sets", and explain the abuse of notation $\alpha \in \mathrm{Ord}$ and then
@@ -845,7 +850,6 @@ $$
 
 ### Descriptive properties of ordinal numbers
 
-
 At this stage I postulate that this is all we need to accept/know about ordinals
 to get all the operational tools we need:
 
@@ -865,8 +869,6 @@ What is the laudry list that we have to do now? Check that we can prove:
 
   - stationary principle (?)
 
-
-
 ### Transfinite induction
 
 #### Transfinite induction on ordinals
@@ -877,7 +879,11 @@ $S \subseteq A$ implies $\next(S) \in A$, then $A = \mathrm{Ord}$.
 #### Proof
 Let
 $$
-S = \{\alpha \in \mathrm{Ord} \; | \; \forall \, \beta \in \mathrm{Ord} \setminus A, \, \alpha < \beta \,\}.
+S = \{
+  \alpha \in \mathrm{Ord} 
+  \; | \; 
+  \forall \, \beta \in \mathrm{Ord} \setminus A, \, \alpha < \beta 
+\}.
 $$
 It is clear that $S$ is an initial segment of $\mathrm{Ord}$ which is also a subclass of $A$.
 If $S$ was proper, by assumption $\next(S)$ would belong to $A$, but then it would also
@@ -948,10 +954,132 @@ F(f_{\alpha}|_{\left[0,\alpha\right[}) = F(f|_{\left[0,\alpha\right[})$,
 $f$ is a solution to the transfinite recursion on $\mathrm{Ord}$.
 $\blacksquare$
 
-### Isomorphism (TODO)
+### Isomorphism
+
+The concept of isomorphism relevant for well-ordered sets is: bijective and
+strictly increasing function.
+
+#### Isomorphism and order-type
+Every well-ordered set $W$ is isomorphic to a unique proper initial segment 
+$\left[0,\alpha\right[$ of the ordinals. The ordinal $\alpha$ is denoted
+$\mathrm{ord}(W)$ and called *order type* of *W*:
+$$
+W \simeq \left[0, \mathrm{ord}(W)\right[
+$$
+
+#### Proof
+Uniqueness is a consequence of the property that no well-ordered set is 
+isomorphic to one of its proper initial segment, which is itself a consequence
+of the "non-compression lemma" which state that any strictly increasing 
+function $f$ between well-ordered sets satisfies $f(x) \geq x$ for any $x$.
+
+To prove the existence, we leverage transfinite recursion. Let $W$ be a 
+well-ordered set. We add a new element denoted $\infty$ at the end of $W$
+(for example $\infty := \{W\}$ since we know that $W \not \in W$), define 
+$f: \mathrm{Ord} \to W \cup \{\infty\}$ by
+$$
+f(\alpha) = \left|
+\begin{array}{rl}
+\next f(\left[0, \alpha \right[) & \mbox{if it exists,} \\
+\infty & \mbox{otherwise.}
+\end{array}
+\right.
+$$
+and $S:= \{\alpha \in \mathrm{Ord} \; | \; f(\alpha) < \infty\}$. 
+We assert that $S$ is a proper initial segment of the ordinals and that
+$f|_S$ is an isomorphism from $S$ to $W$. The steps are:
+
+ 1. for every ordinal $\alpha$, $f(\left[0, \alpha \right[)$ is a segment
+    of $W \cup \{\infty\}$. Proof by transfinite induction with the usual
+    disjunction of cases; we leverage that the empty set is an initial segment,
+    the union of an initial segment with its successor is an initial segment
+    and that a union of initial segments is an initial segment.
+
+ 2. the function $f$ is non-decreasing; by construction.
+
+ 3. if $f(\alpha) < \infty$ and $\alpha < \beta$, then $f(\alpha) < f(\beta)$;
+    also a direct consequence of the definition of $f$.
+
+ 4. there is a (smallest) ordinal $\alpha^*$ such that $f(\alpha^*) = \infty$.
+    "Smallest" results from the fact that the set of $\alpha$ such that
+    $f(\alpha)< \infty$ is a segment of the ordinals since $f$ is non-decreasing.
+    The existence if proven by contradiction: if there is no such $\alpha^*$,
+    $f:\mathrm{Ord} \to W$ is into (by point 3) and therefore we can define the 
+    class function $g: W \to \mathrm{Ord}$ by $g(w) = f^{-1}(w)$ if $w\in f(\mathrm{Ord})$
+    or $g(w) = 0$ otherwise. But then $\mathrm{Ord}$ would be the image of a set
+    by a class function and thus by the axiom of replacement would be as set,
+    which is a contradition. 
+
+  5. $S:= \{\alpha \in \mathrm{Ord} \; | \; f(\alpha) < \infty\} 
+     = \left[0,\alpha^*\right[$ and thus $f(S)= W$ (it is an initial segment
+     of $W$ which has no successor in $W$, thus is $W$). Since $f$ is strictly
+     increasing on $S$, $f|_S$ is an isomorphism.
+
+### Boundedness and Stationarity
+
+#### Boundedness
+If $A \subset \mathrm{Ord}$ is a set of ordinals, 
+there is a $\beta \in \mathrm{Ord}$ 
+such that for any $\alpha \in A$, $\alpha \leq \beta$.
+
+#### Proof
+Associate to $A$ the initial segment $S$ given by
+$$
+S := \{
+  \gamma \in \mathrm{Ord} 
+  \; | \; 
+  \exists \, \alpha \in A, \, \gamma \leq \alpha 
+\;\}
+=
+\bigcup_{\alpha \in A} [0, \alpha].
+$$
+Since by construction $S$ is a set, there is a $\beta \in \mathrm{Ord}$ such
+that $S = \left[0, \beta \right[$; this ordinal $\beta$ satisfies the
+statement of the theorem (and even $\alpha < \beta$).
 
 
+#### Stationary Principle
+Any non-decreasing and bounded sequence of sets indexed by the class of ordinals 
+is eventually constant:
+let $\left<A_{\alpha} \; | \; \alpha \in \mathrm{Ord}\right>$ 
+be such that $A_{\alpha} \subseteq A_{\beta}$ whenever $\alpha \leq \beta$ 
+and assume the existence of a set $A$ such that $A_{\alpha} \subseteq A$ 
+for any $\alpha$; then there is a $\alpha \in \mathrm{Ord}$ such that 
+$A_{\beta} = A_{\alpha}$ for any $\beta \geq \alpha$.  
 
+#### Remark
+The non-decreasing property of the sequence $A_{\alpha}$ is typically inferred
+from the structure of a transfinite recursion that defines it. For example,
+it is non-decreasing if
+$$
+A_{\beta} = G\left(\bigcup_{\alpha < \beta} A_{\alpha}\right)
+\; \mbox{ where } \; \forall X, \; X \subseteq G(X).
+$$
+
+#### Proof (**TODO: reread**)
+Let $\mathcal{D}$ be the class of subsets of $A$ defined by
+$$
+\mathcal{D} :=
+\left\{A_{\beta} \setminus \cup_{\alpha < \beta} A_{\alpha} \in \mathcal{P}(A) 
+\; | \; 
+\beta \in \mathrm{Ord}\right\} \setminus \{\varnothing\}.
+$$
+By the axiom of separation, $\mathcal{D}$ is a set.
+Since $\left<A_{\alpha} \; | \; \alpha \in \mathrm{Ord}\right>$ is non-decreasing, 
+for every $D \in \mathcal{D}$ there is a unique $\beta \in \mathrm{Ord}$ 
+such that $D = A_{\beta} \setminus \cup_{\alpha < \beta} A_{\alpha}$.
+Since the image of $\mathcal{D}$ by this (class) function is exactly the class of
+ordinals
+$$
+X = \{\beta \in \mathrm{Ord} \; | \; \cup_{\alpha < \beta} A_{\alpha} \subset A_{\beta} \; \},
+$$
+by the axiom of replacement, $X$ is actually a set. Let $\alpha$ be the successor
+of this set (the smallest ordinal larger than any ordinal in $X$; it's either
+$\cup X$ or $\cup X +1$);
+now, for any ordinal $\gamma$ larger than $\alpha$ we necessarily 
+have $A_{\gamma} = \cup_{\beta < \gamma} A_{\beta}$ which by transfinite 
+induction proves that $A_{\gamma} = A_{\alpha}$ whenever $\gamma \geq \alpha$.
+$\blacksquare$
 
 Misc. / Unsorted
 ================================================================================
